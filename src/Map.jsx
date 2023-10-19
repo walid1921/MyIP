@@ -3,7 +3,7 @@ import 'leaflet/dist/leaflet.css';
 
 function Map({ yourAddress }) {
   return (
-    <div >
+    <div className='h-[500px] w-[700px]'>
       <MapContainer
         center={[51.505, -0.09]}
         zoom={13}

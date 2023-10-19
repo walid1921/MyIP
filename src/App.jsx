@@ -17,6 +17,7 @@ export default function App() {
 
         const data = await response.json();
         setMyAddress(data);
+        console.log(data)
 
       } catch (error) {
         console.error(error.message);
@@ -27,13 +28,14 @@ export default function App() {
   }, []);
 
   return (
-    <div className="h-[100vh] flex flex-col justify-center items-center">
-      <p className='text-xl text-orange-300'>
-        Your IP Address is :
-        <span className='text-blue-400'> {myAddress.ip}</span>
-      </p>
+    <div className="h-[100vh] flex flex-col justify-center items-center gap-6">
+      <div className='flex flex-col'>
+        
+        <span className='text-xl text-orange-300'>Your IP Address is : {myAddress.ip}</span>
+        {/* <span className='text-blue-400'> City :  {myAddress.location}</span> */}
+      </div>
 
-      <Map yourAddress={myAddress.ip} />
+      <Map yourAddress={myAddress.ip}  />
     </div>
 
 
