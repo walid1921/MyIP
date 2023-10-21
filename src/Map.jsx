@@ -4,9 +4,8 @@ import 'leaflet/dist/leaflet.css';
 function Map({ lat, lng }) {
 
   const position = [lat, lng]
-  console.log(position)
 
-
+  
   return (
     <div className='h-[500px] w-[700px]'>
       <MapContainer
