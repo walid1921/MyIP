@@ -1,69 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Map from './Map';
+import axios from "axios";
 
 
 
 export default function App() {
   const [myAddress, setMyAddress] = useState({});
-  const [country, setCountry] = useState([]);
+  const [country, setCountry] = useState({});
+  const [flag, setFlag] = useState({});
 
   const [status, setStatus] = useState("loading")
 
-  const userCountry = country.find(country => country.alpha2Code === myAddress.location.country);
-
-
   useEffect(() => {
+
     setStatus("loading")
-    async function getAddress() {
-      try {
-        const response = await fetch(`https://geo.ipify.org/api/v1?apiKey=${import.meta.env.VITE_REACT_API_URL}`);
 
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const data = await response.json();
-        setMyAddress(data);
-        // console.log(data)
-        setStatus("success")
-
-      } catch (error) {
+    axios.get(`https://geo.ipify.org/api/v1?apiKey=${import.meta.env.VITE_REACT_API_URL}`)
+      .then((data) => {
+        setMyAddress(data.data);
+        axios.get(`https://restcountries.com/v3.1/alpha/${data.data.location.country}?fields=name,flags`)
+          .then((data) => {
+            setCountry(data.data.name)
+            setFlag(data.data.flags)
+            setStatus("success")
+          })
+          .catch((error) => {
+            console.error(error.message);
+            setStatus("error")
+          })
+      })
+      .catch((error) => {
         console.error(error.message);
         setStatus("error")
-      }
-    }
+      })
 
-    getAddress();
   }, []);
 
-  useEffect(() => {
-    setStatus("loading")
-    async function getCountry() {
-      try {
-        const response = await fetch(`http://api.countrylayer.com/v2/all?access_key=bb4ec63ce7f584a5ac3671f691651bdf`);
-
-
-
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const data = await response.json();
-        console.log(data)
-        setCountry(data)
-       
-
-        setStatus("success")
-
-      } catch (error) {
-        console.error(error.message);
-        setStatus("error")
-      }
-    }
-
-
-   
-  }, []);
 
   return (
     <div className="h-[100vh] flex flex-col justify-center items-center gap-6">
@@ -75,7 +47,9 @@ export default function App() {
         <p className='text-blue-400'>{myAddress.location ? myAddress.location.city : 'Unknown City'}</p>
 
 
-        <p>{userCountry ? userCountry.name : 'Unknown Country'}</p>
+        <p>{country.common ? country.common : 'Unknown Country'}</p>
+        <img height={50} width={50} src={flag.svg} alt="Italian Trulli" />
+
 
 
       </div>
