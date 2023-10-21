@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-function Map({ lat, lng }) {
+function Map({ lat, lng, flag }) {
 
   const position = [lat, lng]
 
@@ -19,7 +19,8 @@ function Map({ lat, lng }) {
         />
         <Marker position={position}>
           <Popup>
-            fh
+            Your current location <img className='h-5 w-5' src={flag} alt={flag} />
+            
           </Popup>
         </Marker>
       </MapContainer>

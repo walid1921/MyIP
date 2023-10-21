@@ -62,7 +62,7 @@ export default function App() {
 
 
 
-        {status === "success" ? <Map lat={myAddress.location && myAddress.location.lat} lng={myAddress.location && myAddress.location.lng} /> : null}
+        {status === "success" ? <Map lat={myAddress.location && myAddress.location.lat} lng={myAddress.location && myAddress.location.lng} flag={flag.svg} /> : null}
       </div>
 
 
