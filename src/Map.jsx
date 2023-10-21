@@ -19,7 +19,7 @@ function Map({ lat, lng }) {
         />
         <Marker position={position}>
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            fh
           </Popup>
         </Marker>
       </MapContainer>
