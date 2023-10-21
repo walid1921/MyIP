@@ -38,23 +38,34 @@ export default function App() {
 
 
   return (
-    <div className="h-[100vh] flex flex-col justify-center items-center gap-6">
-      <div className='flex flex-col'>
+    <div className=" h-[100vh] flex  justify-center items-center gap-6">
+      <div className='flex h-[500px]  bg-white rounded-lg'>
+        <div className=' flex flex-col justify-center '>
 
-        <span className='text-xl text-orange-300'>Your IP Address is : {myAddress.ip}</span>
-
-
-        <p className='text-blue-400'>{myAddress.location ? myAddress.location.city : 'Unknown City'}</p>
-
-
-        <p>{country.common ? country.common : 'Unknown Country'}</p>
-        <img height={50} width={50} src={flag.svg} alt="Italian Trulli" />
+          <div className='h-[50%] flex flex-col justify-center items-center gap-4'>
+            <h1 className='font-semibold text-2xl text-orange-300'>Your IP Address is : {myAddress.ip}</h1>
 
 
+            <p className='text-blue-400 text-xl'>{myAddress.location ? myAddress.location.city : 'Unknown City'}</p>
 
+            <p className='text-lg font-semibold'>{country.common ? country.common : 'Unknown Country'}</p>
+          </div>
+
+
+          <img className='w-full h-[50%] rounded-bl-xl' src={flag.svg} alt="Italian Trulli" />
+
+        </div>
+
+
+
+
+
+
+
+        {status === "success" ? <Map lat={myAddress.location && myAddress.location.lat} lng={myAddress.location && myAddress.location.lng} /> : null}
       </div>
 
-      {status === "success" ? <Map lat={myAddress.location && myAddress.location.lat} lng={myAddress.location && myAddress.location.lng} /> : null}
+
 
     </div>
 
