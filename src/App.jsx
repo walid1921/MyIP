@@ -30,12 +30,18 @@ export default function App() {
   return (
     <div className="h-[100vh] flex flex-col justify-center items-center gap-6">
       <div className='flex flex-col'>
-        
+
         <span className='text-xl text-orange-300'>Your IP Address is : {myAddress.ip}</span>
-        {/* <span className='text-blue-400'> City :  {myAddress.location}</span> */}
+
+
+        <p className='text-blue-400'>{myAddress.location ? myAddress.location.city : 'Unknown City'}</p>
+
+        <p>{myAddress.location && myAddress.location.lng}</p>
+
+        
       </div>
 
-      <Map yourAddress={myAddress.ip}  />
+      <Map  lat={myAddress.location && myAddress.location.lat} lng={myAddress.location && myAddress.location.lng} />
     </div>
 
 
